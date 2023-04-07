@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('partials/head', {title: 'Series'}) %>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+        <% for(const serie of series) {
+            if(serie._id == id) {
+                // for(const comment of serie.comments) {
+                //     if(comment._id == idComment) {   //Ici il me manque un moyen de récupérer un seul commentaire, il aurait fallu que je passe un autre paramètre pour avoir l'id du commentaire à modifier
+        %>
+
+            <div class="col-9 mx-auto">
+
+                <div class="card my-5">
+
+                    <div class="card-body text-center">
+
+
+                        <div class="card-title">Modification d'une serie</div>
+
+                        <form action="/comments/edit/<%= serie._id %>" method="post">
+
+                            <input type="text"
+                                   id="content"
+                                   name="content"
+                                   class="form-control"
+                                   placeholder="Contenu du commentaire"
+                                   value="<%= serie.comments[0].content %>">
+                            <br>
+                            <input type="text"
+                                   id="author"
+                                   name="author"
+                                   class="form-control"
+                                   placeholder="Auteur du commentaire"
+                                   value="<%= serie.comments[0].author %>">
+                            <br>
+                            <input type="text"
+                                   id="date"
+                                   name="date"
+                                   class="form-control"
+                                   placeholder="Date du commentaire"
+                                   value="<%= serie.comments[0].date %>">
+
+
+                            <input type="submit" value="Confirmer" class="btn btn-success text-uppercase mt-2">
+
+                            <a href="/" class="btn btn-primary text-uppercase mt-2">Revenir aux series</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% } } %>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('partials/head', {title: 'Series'}) %>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+        <% for(const serie of series) {
+        if(serie._id == id) { %>
+
+            <div class="col-9 mx-auto">
+
+                <div class="card my-5">
+
+                    <div class="card-body text-center">
+
+
+                        <div class="card-title">Modification d'une serie</div>
+
+                        <form action="/edit/<%= serie._id %>" method="post">
+
+                            <input type="text"
+                                   id="name"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Nom de la série"
+                                   value="<%= serie.name %>">
+                            <br>
+                            <input type="text"
+                                   id="releaseDate"
+                                   name="releaseDate"
+                                   class="form-control"
+                                   placeholder="Date de sortie de la série"
+                                   value="<%= serie.releaseDate %>">
+                            <br>
+                            <input type="text"
+                                   id="numberOfSeason"
+                                   name="numberOfSeason"
+                                   class="form-control"
+                                   placeholder="Nombre de saisons de la série"
+                                   value="<%= serie.numberOfSeason %>">
+                            <br>
+                            <input type="text"
+                                   id="description"
+                                   name="description"
+                                   class="form-control"
+                                   placeholder="Description de la série"
+                                   value="<%= serie.description %>">
+                            <br>
+
+                            <input type="text"
+                                   id="imgUrl"
+                                   name="imgUrl"
+                                   class="form-control"
+                                   placeholder="Url de l'image de la série"
+                                   value="<%= serie.imgUrl %>">
+
+                            <input type="submit" value="Confirmer" class="btn btn-success text-uppercase mt-2">
+
+                            <a href="/" class="btn btn-primary text-uppercase mt-2">Revenir aux series</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% } } %>
+    </div>
+</div>

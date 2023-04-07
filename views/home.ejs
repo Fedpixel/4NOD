@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta charset="utf8"/>
+    <title>Mon app Node.js</title>
+    <%- include('partials/head', {title: 'Series'}) %>
+</head>
+<body>
+<div class="container">
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">J'ai pas d'inspi</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Un site qui contient déja 2 séries ! (et ça rime)</p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-10 mx-auto">
+
+            <div class="d-flex justify-content-between mb-3">
+                <h2>Nos séries</h2>
+                <a href="/add" class="btn btn-success btn-lg">Ajouter</a>
+            </div>
+
+            <% if(series.length > 0) {
+                    for(const serie of series) { %>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 mx-auto">
+                            <img src="<%= serie.imgUrl %>" style="width: 250px">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= serie.name %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Sortie le <%= serie.releaseDate %>
+                                    , <%= serie.numberOfSeason %> saisons</h6>
+                                <p class="card-text"><%= serie.description %></p>
+                                <a href="/edit/<%= serie._id %>" class="btn btn-primary">Modifier</a>
+                                <a href="/delete/<%= serie._id %>" class="btn btn-danger">Supprimer</a>
+
+
+                                <!--Section commentaires-->
+                                <ul class="list-group list-group-flush">
+                                    <%
+                                    if(serie.comments.length > 0) {
+                                            for(const comment of serie.comments) {
+                                    %>
+                                    <li class="list-group-item">
+                                        <b><%= comment.author %>, le <%= comment.date %>: </b><%= comment.content %>
+                                        <a href="/comments/edit/<%= serie._id %>" class="btn btn-primary btn-sm">Modifier</a>
+                                        <a href="/comments/delete/<%= serie._id %>" class="btn btn-danger btn-sm">Supprimer</a>
+                                    </li>
+                                    <% }
+                                    } else { %>
+                                        <li class="list-group-item">Pas encore de commentaires</li>
+                                    <% } %>
+                                </ul>
+                                <form action="/newComment" method="post">
+
+                                    <input type="text"
+                                           id="newComment"
+                                           name="newComment"
+                                           class="form-control"
+                                           placeholder="Commente ici !">
+                                    <input type="submit" value="Envoyer" class="btn btn-light text-uppercase mt-2">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }
+            } else { %>
+                <h3 class="text-center my-5">Il n'y a pas encore de series !</h3>
+            <% } %>
+        </div>
+    </div>
+</div>
+</body>
+</html>
